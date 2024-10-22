@@ -27,7 +27,7 @@ except FileNotFoundError:
     long_description = "A Python package for connecting with databases."
 
 setup(
-    name="database automator",
+    name="database_automator",
     version="0.0.3",
     author="shaheennabi",
     author_email="ishaheennabi333@gmail.com",
