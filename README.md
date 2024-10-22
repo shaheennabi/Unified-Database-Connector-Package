@@ -2,7 +2,7 @@
 
 ## Overview
 
-**DB Crud Automates* is a powerful tool designed to simplify and automate database operations, particularly for MongoDB. This library allows developers to easily connect to a MongoDB database and perform Create, Read, Update, and Delete (CRUD) operations with minimal setup and code. The goal of Database Automator is to streamline database interactions and enhance productivity for developers working with databases.
+**DB Crud Automated* is a powerful tool designed to simplify and automate database operations, particularly for MongoDB. This library allows developers to easily connect to a MongoDB database and perform Create, Read, Update, and Delete (CRUD) operations with minimal setup and code. The goal of Database Automator is to streamline database interactions and enhance productivity for developers working with databases.
 
 ## Goal
 
@@ -19,7 +19,8 @@ The primary objective of Database Automator is to automate functionalities for c
 To install Database Automator, you can use pip. Run the following command in your terminal:
 
 ```bash
-pip install db-crud-automates```
+pip install db-crud-automated
+```
 
 ## Features
 
@@ -33,7 +34,7 @@ Here’s a quick example of how to use the `mongo_operation` class to connect to
 
 ### Example
 
-```python
+```bash
 from mongodb_connect.mongo_crud import mongo_operation
 
 # Initialize the MongoDB operation class
@@ -72,5 +73,5 @@ mongo_client.insert_record(records_list, collection_name='your_collection_name')
 
 ### Notes
 
-- Replace `your_mongodb_uri`, `your_database_name`, `your_collection_name`, and `your_email@example.com` with appropriate values.
+- Replace `your_mongodb_uri`, `your_database_name`, `your_collection_name`, with appropriate values.
 - Adjust any sections based on your specific implementation and requirements.

@@ -27,8 +27,8 @@ except FileNotFoundError:
     long_description = "A Python package for connecting with databases."
 
 setup(
-    name="db_crud_automates",
-    version="0.0.3",
+    name="db_crud_automated",
+    version="0.0.10",
     author="shaheennabi",
     author_email="ishaheennabi333@gmail.com",
     description="A Python package for connecting with databases.",
