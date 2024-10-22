@@ -40,7 +40,7 @@ setup(
     },
     package_dir={"": "src"},
     packages=find_packages(where="src"),
-    install_requires=get_requirements('requirements.txt'),  # Load from requirements file
+    install_requires=["pymongo","pymongo[srv]","dnspython", "pandas", "numpy", "ensure", "pytest"],
     include_package_data=True,
-    zip_safe=False,
+    zip_safe=False, 
 )
