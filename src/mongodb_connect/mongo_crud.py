@@ -73,4 +73,5 @@ class MongoOperation:
         data_json = json.loads(dataframe.to_json(orient='records'))
         collection = self.create_collection()
         collection.insert_many(data_json)
-        
+
+# Ensure there's a newline at the end of the file
