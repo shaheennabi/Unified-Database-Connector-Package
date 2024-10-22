@@ -1,15 +1,8 @@
-pymongo
-pymongo[srv]
-dnspython
-pandas
-numpy
-ensure
-
-# dev requirements -
+# testing dependencies
 pytest==7.1.3
 tox==3.25.1
-black==22.8.0
-flake8==5.0.4
-mypy==0.971
 
--e .
+# linting
+flake8==5.0.4
+black==22.8.0
+mypy==0.971
