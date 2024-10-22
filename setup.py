@@ -17,9 +17,7 @@ def get_requirements(file_path: str) -> List[str]:
         raise FileNotFoundError(f"{file_path} does not exist.")
     return requirements
 
-# Modify this to point to the correct requirements file
-requirements_file_path = r'C:\Users\mailm\Downloads\projects\Unified-Database-Connector-Package\requirements.txt'
-requirements = get_requirements(requirements_file_path)
+
 
 # Read long description from README.md
 try:
@@ -39,7 +37,7 @@ setup(
     url="https://github.com/shaheennabi/Unified-Database-Connector-Package",
     packages=find_packages(where="src"),  
     package_dir={"": "src"},
-    install_requires=requirements,
+    install_requires=["pymongo","pandas", "numpy", "dnspython", "pytest"],
     include_package_data=True,
     zip_safe=False,
 )
