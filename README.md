@@ -71,7 +71,4 @@ mongo_client.insert_record(records_list, collection_name='your_collection_name')
 
 ---
 
-### Notes
-
-- Replace `your_mongodb_uri`, `your_database_name`, `your_collection_name`, with appropriate values.
-- Adjust any sections based on your specific implementation and requirements.
+### Package or Repo will be updated soon 
