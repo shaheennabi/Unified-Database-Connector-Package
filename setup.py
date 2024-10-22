@@ -10,37 +10,28 @@ def get_requirements(file_path: str) -> List[str]:
     if os.path.exists(file_path):
         with open(file_path, encoding="utf-8") as f:
             requirements = f.readlines()
-            requirements = [req.strip() for req in requirements]
+            requirements = [req.strip() for req in requirements if req.strip()]
             if HYPHEN_E_DOT in requirements:
                 requirements.remove(HYPHEN_E_DOT)
     else:
         raise FileNotFoundError(f"{file_path} does not exist.")
     return requirements
 
-__version__ = "0.0.3"
-REPO_NAME = "Unified-Database-Connector-Package"
-PKG_NAME = "database_automator"  # Change to lowercase
-AUTHOR_USER_NAME = "shaheennabi"
-AUTHOR_EMAIL = "ishaheennabi333@gmail.com"
-
-with open('README.md', 'r', encoding='utf-8') as f:
-    long_description = f.read()
+# Modify this to point to the correct requirements file
+requirements = get_requirements('requirements.txt')  # or 'requirements_dev.txt'
 
 setup(
-    name=PKG_NAME,
-    version=__version__,
-    author=AUTHOR_USER_NAME,
-    author_email=AUTHOR_EMAIL,
+    name="Database Automator",
+    version="0.0.3",
+    author="shaheennabi",
+    author_email="ishaheennabi333@gmail.com",
     description="A Python package for connecting with databases.",
-    long_description=long_description,
+    long_description=open('README.md').read(),
     long_description_content_type="text/markdown",
-    url=f"https://github.com/{AUTHOR_USER_NAME}/{REPO_NAME}",
-    project_urls={
-        "Bug Tracker": f"https://github.com/{AUTHOR_USER_NAME}/{REPO_NAME}/issues",
-    },
-    package_dir={"": "src"},
+    url="https://github.com/shaheennabi/Unified-Database-Connector-Package",
     packages=find_packages(where="src"),
-    install_requires=["pymongo","pymongo[srv]","dnspython", "pandas", "numpy", "ensure", "pytest"],
+    package_dir={"": "src"},
+    install_requires=requirements,
     include_package_data=True,
-    zip_safe=False, 
+    zip_safe=False,
 )
