@@ -8,10 +8,11 @@ from pymongo import MongoClient
 # Configure logging at the module level
 logging.basicConfig(level=logging.INFO)
 
+
 class MongoOperation:
     _collection = None
     _database = None
-    
+
     def __init__(self, client_url: str, database_name: str, collection_name: str = None):
         self.client_url = client_url
         self.database_name = database_name
@@ -27,14 +28,14 @@ class MongoOperation:
         if MongoOperation._database is None:
             MongoOperation._database = self.client[self.database_name]
         return MongoOperation._database
-    
+
     def create_collection(self) -> pymongo.collection.Collection:
         """Creates and returns the MongoDB collection."""
         if MongoOperation._collection is None or self.collection_name != MongoOperation._collection.name:
             database = self.create_database()
             MongoOperation._collection = database[self.collection_name]
         return MongoOperation._collection
-    
+
     def insert_record(self, record: Union[Dict[str, Any], List[Dict[str, Any]]]) -> None:
         """Inserts a single or multiple records into the collection."""
         collection = self.create_collection()
@@ -72,3 +73,4 @@ class MongoOperation:
         data_json = json.loads(dataframe.to_json(orient='records'))
         collection = self.create_collection()
         collection.insert_many(data_json)
+
