@@ -18,9 +18,9 @@ def get_requirements(file_path: str) -> List[str]:
     return requirements
 
 
-__version__ = "0.0.1"
+__version__ = "0.0.3"
 REPO_NAME = "Unified-Database-Connector-Package"
-PKG_NAME = "Unified-Database-Connector"
+PKG_NAME = "Database Automator"
 AUTHOR_USER_NAME = "shaheennabi"
 AUTHOR_EMAIL = "ishaheennabi333@gmail.com"
 
@@ -44,4 +44,10 @@ setup(
     install_requires=get_requirements("./requirements_dev.txt"),
     include_package_data=True,
     zip_safe=False,
+    classifiers=[
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+    ],
+    python_requires='>=3.6',
 )
