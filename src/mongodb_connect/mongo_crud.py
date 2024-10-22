@@ -1,77 +1,71 @@
-import logging
+from typing import Any
+import os
+import pandas as pd
 import pymongo
 import json
-from typing import Any, List, Dict, Union
+from ensure import ensure_annotations
+
+
+from typing import Any
+import os
 import pandas as pd
-from pymongo import MongoClient
+from pymongo.mongo_client import MongoClient
+import json
+from ensure import ensure_annotations
 
-# Configure logging at the module level
-logging.basicConfig(level=logging.INFO)
 
-
-class MongoOperation:
-    _collection = None
-    _database = None
-
-    def __init__(self, client_url: str, database_name: str, collection_name: str = None):
-        self.client_url = client_url
-        self.database_name = database_name
-        self.collection_name = collection_name
-        self.client = self.create_mongo_client()
-
-    def create_mongo_client(self) -> MongoClient:
-        """Creates a MongoDB client."""
-        return MongoClient(self.client_url)
-
-    def create_database(self):
-        """Creates and returns the MongoDB database."""
-        if MongoOperation._database is None:
-            MongoOperation._database = self.client[self.database_name]
-        return MongoOperation._database
-
-    def create_collection(self) -> pymongo.collection.Collection:
-        """Creates and returns the MongoDB collection."""
-        if MongoOperation._collection is None or self.collection_name != MongoOperation._collection.name:
-            database = self.create_database()
-            MongoOperation._collection = database[self.collection_name]
-        return MongoOperation._collection
-
-    def insert_record(self, record: Union[Dict[str, Any], List[Dict[str, Any]]]) -> None:
-        """Inserts a single or multiple records into the collection."""
-        collection = self.create_collection()
-        try:
-            if isinstance(record, list):
-                if all(isinstance(data, dict) for data in record):
-                    collection.insert_many(record)
-                else:
-                    raise TypeError("All items in the record list must be dictionaries.")
-            elif isinstance(record, dict):
-                collection.insert_one(record)
-            else:
-                raise TypeError("Record must be either a dictionary or a list of dictionaries.")
-            logging.info(f"Inserted record(s) into {self.collection_name}")
-        except Exception as e:
-            logging.error(f"Error inserting record(s): {e}")
-            raise
-
-    def read_datafile(self, datafile: str) -> pd.DataFrame:
-        """Reads data from a CSV or Excel file."""
-        try:
-            if datafile.endswith('.csv'):
-                return pd.read_csv(datafile, encoding='utf-8')
-            elif datafile.endswith('.xlsx'):
-                return pd.read_excel(datafile, encoding='utf-8')
-            else:
-                raise ValueError("File must be a CSV or Excel file.")
-        except Exception as e:
-            logging.error(f"Error reading file {datafile}: {e}")
-            raise
-
-    def bulk_insert(self, datafile: str) -> None:
-        """Inserts multiple records from a CSV or Excel file into the collection."""
-        dataframe = self.read_datafile(datafile)
-        data_json = json.loads(dataframe.to_json(orient='records'))
-        collection = self.create_collection()
-        collection.insert_many(data_json)
-
-# Ensure there's a newline at the end of the file
+class mongo_operation:
+    __collection=None # here i have created a private/protected variable
+    __database=None
+    
+    def __init__(self,client_url: str, database_name: str, collection_name: str=None):
+        self.client_url=client_url
+        self.database_name=database_name
+        self.collection_name=collection_name
+       
+    def create_mongo_client(self,collection=None):
+        client=MongoClient(self.client_url)
+        return client
+    
+    def create_database(self,collection=None):
+        if mongo_operation.__database==None:
+            client=self.create_mongo_client(collection)
+            self.database=client[self.database_name]
+        return self.database 
+    
+    def create_collection(self,collection=None):
+        if mongo_operation.__collection==None:
+            database=self.create_database(collection)
+            self.collection=database[self.collection_name]
+            mongo_operation.__collection=collection
+        
+        if mongo_operation.__collection!=collection:
+            database=self.create_database(collection)
+            self.collection=database[self.collection_name]
+            mongo_operation.__collection=collection
+            
+        return self.collection
+    
+    def insert_record(self,record: dict, collection_name: str) -> Any:
+        if type(record) == list:
+            for data in record:
+                if type(data) != dict:
+                    raise TypeError("record must be in the dict")    
+            collection=self.create_collection(collection_name)
+            collection.insert_many(record)
+        elif type(record)==dict:
+            collection=self.create_collection(collection_name)
+            collection.insert_one(record)
+    
+    def bulk_insert(self,datafile,collection_name:str=None):
+        self.path=datafile
+        
+        if self.path.endswith('.csv'):
+            pd.read.csv(self.path,encoding='utf-8')
+            
+        elif self.path.endswith(".xlsx"):
+            dataframe=pd.read_excel(self.path,encoding='utf-8')
+            
+        datajson=json.loads(dataframe.to_json(orient='record'))
+        collection=self.create_collection()
+        collection.insert_many(datajson)
