@@ -2,7 +2,7 @@
 
 ## Overview
 
-**Database Automator v1** is a powerful tool designed to simplify and automate database operations, particularly for MongoDB. This library allows developers to easily connect to a MongoDB database and perform Create, Read, Update, and Delete (CRUD) operations with minimal setup and code. The goal of Database Automator is to streamline database interactions and enhance productivity for developers working with databases.
+**DB Crud Automate* is a powerful tool designed to simplify and automate database operations, particularly for MongoDB. This library allows developers to easily connect to a MongoDB database and perform Create, Read, Update, and Delete (CRUD) operations with minimal setup and code. The goal of Database Automator is to streamline database interactions and enhance productivity for developers working with databases.
 
 ## Goal
 
