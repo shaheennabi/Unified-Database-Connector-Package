@@ -18,7 +18,15 @@ def get_requirements(file_path: str) -> List[str]:
     return requirements
 
 # Modify this to point to the correct requirements file
-requirements = get_requirements('requirements.txt')  # or 'requirements_dev.txt'
+requirements_file_path = r'C:\Users\mailm\Downloads\projects\Unified-Database-Connector-Package\requirements.txt'
+requirements = get_requirements(requirements_file_path)
+
+# Read long description from README.md
+try:
+    with open('README.md', encoding="utf-8") as f:
+        long_description = f.read()
+except FileNotFoundError:
+    long_description = "A Python package for connecting with databases."
 
 setup(
     name="Database Automator",
@@ -26,10 +34,10 @@ setup(
     author="shaheennabi",
     author_email="ishaheennabi333@gmail.com",
     description="A Python package for connecting with databases.",
-    long_description=open('README.md').read(),
+    long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/shaheennabi/Unified-Database-Connector-Package",
-    packages=find_packages(where="src"),
+    packages=find_packages(where="src"),  
     package_dir={"": "src"},
     install_requires=requirements,
     include_package_data=True,
