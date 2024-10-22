@@ -73,4 +73,3 @@ class MongoOperation:
         data_json = json.loads(dataframe.to_json(orient='records'))
         collection = self.create_collection()
         collection.insert_many(data_json)
-
