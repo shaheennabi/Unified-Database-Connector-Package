@@ -5,10 +5,8 @@ from typing import Any, List, Dict, Union
 import pandas as pd
 from pymongo import MongoClient
 
-
 # Configure logging at the module level
 logging.basicConfig(level=logging.INFO)
-
 
 class MongoOperation:
     _collection = None
