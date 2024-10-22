@@ -17,10 +17,9 @@ def get_requirements(file_path: str) -> List[str]:
         raise FileNotFoundError(f"{file_path} does not exist.")
     return requirements
 
-
 __version__ = "0.0.3"
 REPO_NAME = "Unified-Database-Connector-Package"
-PKG_NAME = "Database Automator"
+PKG_NAME = "database_automator"  # Change to lowercase
 AUTHOR_USER_NAME = "shaheennabi"
 AUTHOR_EMAIL = "ishaheennabi333@gmail.com"
 
@@ -41,7 +40,7 @@ setup(
     },
     package_dir={"": "src"},
     packages=find_packages(where="src"),
-    install_requires=get_requirements("./requirements.txt"),
+    install_requires=get_requirements('requirements.txt'),  # Load from requirements file
     include_package_data=True,
     zip_safe=False,
 )
