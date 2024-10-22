@@ -1,5 +1,7 @@
 from pymongo.mongo_client import MongoClient
 import json
+from typing import Any
+import pandas as pd
 
 class mongo_operation:
     __collection=None # here i have created a private/protected variable
