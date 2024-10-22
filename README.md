@@ -59,7 +59,7 @@ mongo_client.insert_record(records_list, collection_name='your_collection_name')
 
 ## Contributing
 
-🤝 Contributions are welcome! If you have suggestions or improvements, please [open an issue](https://github.com/your-repo/issues) or submit a pull request.
+🤝 Contributions are welcome! If you have suggestions or improvements, please [open an issue](https://github.com/shaheennabi/Unified-Database-Connector-Package/issues) or submit a pull request.
 
 ## License
 
