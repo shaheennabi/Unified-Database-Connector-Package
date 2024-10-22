@@ -41,13 +41,7 @@ setup(
     },
     package_dir={"": "src"},
     packages=find_packages(where="src"),
-    install_requires=get_requirements("./requirements_dev.txt"),
+    install_requires=get_requirements("./requirements.txt"),
     include_package_data=True,
     zip_safe=False,
-    classifiers=[
-        "Programming Language :: Python :: 3",
-        "License :: OSI Approved :: MIT License",
-        "Operating System :: OS Independent",
-    ],
-    python_requires='>=3.7',
 )
