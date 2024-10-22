@@ -1,9 +1,14 @@
+import logging
 import pymongo
 import json
-from typing import Any, List, Dict
-import os
+from typing import Any, List, Dict, Union
 import pandas as pd
 from pymongo import MongoClient
+
+
+# Configure logging at the module level
+logging.basicConfig(level=logging.INFO)
+
 
 class MongoOperation:
     _collection = None
@@ -32,29 +37,40 @@ class MongoOperation:
             MongoOperation._collection = database[self.collection_name]
         return MongoOperation._collection
     
-    def insert_record(self, record: Dict[str, Any] | List[Dict[str, Any]]) -> None:
+    def insert_record(self, record: Union[Dict[str, Any], List[Dict[str, Any]]]) -> None:
         """Inserts a single or multiple records into the collection."""
         collection = self.create_collection()
-        if isinstance(record, list):
-            if all(isinstance(data, dict) for data in record):
-                collection.insert_many(record)
+        try:
+            if isinstance(record, list):
+                if all(isinstance(data, dict) for data in record):
+                    collection.insert_many(record)
+                else:
+                    raise TypeError("All items in the record list must be dictionaries.")
+            elif isinstance(record, dict):
+                collection.insert_one(record)
             else:
-                raise TypeError("All items in the record list must be dictionaries.")
-        elif isinstance(record, dict):
-            collection.insert_one(record)
-        else:
-            raise TypeError("Record must be either a dictionary or a list of dictionaries.")
-    
+                raise TypeError("Record must be either a dictionary or a list of dictionaries.")
+            logging.info(f"Inserted record(s) into {self.collection_name}")
+        except Exception as e:
+            logging.error(f"Error inserting record(s): {e}")
+            raise
+
+    def read_datafile(self, datafile: str) -> pd.DataFrame:
+        """Reads data from a CSV or Excel file."""
+        try:
+            if datafile.endswith('.csv'):
+                return pd.read_csv(datafile, encoding='utf-8')
+            elif datafile.endswith('.xlsx'):
+                return pd.read_excel(datafile, encoding='utf-8')
+            else:
+                raise ValueError("File must be a CSV or Excel file.")
+        except Exception as e:
+            logging.error(f"Error reading file {datafile}: {e}")
+            raise
+
     def bulk_insert(self, datafile: str) -> None:
         """Inserts multiple records from a CSV or Excel file into the collection."""
-        if datafile.endswith('.csv'):
-            dataframe = pd.read_csv(datafile, encoding='utf-8')
-        elif datafile.endswith('.xlsx'):
-            dataframe = pd.read_excel(datafile, encoding='utf-8')
-        else:
-            raise ValueError("File must be a CSV or Excel file.")
-
+        dataframe = self.read_datafile(datafile)
         data_json = json.loads(dataframe.to_json(orient='records'))
         collection = self.create_collection()
         collection.insert_many(data_json)
-
