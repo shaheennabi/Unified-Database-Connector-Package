@@ -58,19 +58,23 @@ records_list = [
 mongo_client.insert_record(records_list, collection_name='your_collection_name')
 ```
 
-## Contributing
+## 🎉 Contributing 🎉
 
 🤝 Contributions are welcome! If you have suggestions or improvements, please [open an issue](https://github.com/shaheennabi/Unified-Database-Connector-Package/issues) or submit a pull request.
 
-## License
+---
+
+## 🎆 License 🎆
 
 📝 This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
 
-## Contact
+---
+
+## ✉️ Contact ✉️
 
 📧 For questions or support, feel free to reach out via email at [mailmessage30@gmail.com](mailto:mailmessage30@gmail.com).
 
 ---
 
+### 🚀✨ Package or Repo will be updated soon ✨🚀
 
-### Package or Repo will be updated soon 
