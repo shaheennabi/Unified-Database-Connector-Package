@@ -2,7 +2,7 @@
 
 ## Overview
 
-**DB Crud Automated** is a powerful tool designed to simplify and automate database operations, especially for MongoDB. This library enables developers to connect to a MongoDB database effortlessly and perform Create, Read, Update, and Delete (CRUD) operations with minimal setup and code. Database Automator is built to streamline database interactions and boost productivity for developers working with databases
+**DB Crud Automated** is a powerful tool designed to simplify and automate database operations, especially for MongoDB. This library enables developers to connect to a MongoDB database effortlessly and perform Create, Read, Update, and Delete (CRUD) operations with minimal setup and code. Database Automator is built to streamline database interactions and boost productivity for developers working with databases.
 
 ## Goal
 
